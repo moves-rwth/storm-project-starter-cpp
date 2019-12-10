@@ -1,5 +1,5 @@
 # storm-project-starter-cpp
-Starter project for the C++ API of Storm
+Starter project for the C++ API of [Storm](https://www.stormchecker.org).
 
 ## Getting Started
 First, configure and compile the project. Therefore, execute
@@ -23,6 +23,6 @@ Then, run the executable using
 ```
 The answer should be yes.
 
-## What is next
+## What is next?
 You are all set to implement your own tools on top of storm. 
 Feel free to contribute your new algorithms to storm, such that others can enjoy them.
