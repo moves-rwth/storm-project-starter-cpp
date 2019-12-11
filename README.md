@@ -2,12 +2,14 @@
 Starter project for the C++ API of [Storm](https://www.stormchecker.org).
 
 ## Getting Started
+Before starting, make sure that Storm is installed. If not, see the [documentation](http://www.stormchecker.org/documentation/installation/installation.html) for details on how to install Storm.
+
 First, configure and compile the project. Therefore, execute
 ```
 mkdir build
 cd build
 cmake ..
-make 
+make
 cd ..
 ```
 
@@ -24,5 +26,5 @@ Then, run the executable using
 The answer should be yes.
 
 ## What is next?
-You are all set to implement your own tools on top of storm. 
-Feel free to contribute your new algorithms to storm, such that others can enjoy them.
+You are all set to implement your own tools on top of Storm.
+Feel free to contribute your new algorithms to Storm, such that others can enjoy them.
