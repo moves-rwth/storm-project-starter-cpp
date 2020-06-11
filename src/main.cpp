@@ -33,7 +33,7 @@ bool check(std::string const& path_to_model, std::string const& property_string)
     // Use that we know that the model checker produces an explicit quantitative result
     auto quantRes = result->asExplicitQuantitativeCheckResult<double>();
     // Now compare the result at the first initial state of the model with 0.5.
-    return quantRes[model->getInitialStates()[0]] > 0.5;
+    return quantRes[*model->getInitialStates().begin()] > 0.5;
 }
 
 
