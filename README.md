@@ -27,4 +27,6 @@ The answer should be yes.
 
 ## What is next?
 You are all set to implement your own tools on top of Storm.
+Note that you might need to add additional Storm libraries as dependencies in [CMake](CMakeLists.txt).
+
 Feel free to contribute your new algorithms to Storm, such that others can enjoy them.
