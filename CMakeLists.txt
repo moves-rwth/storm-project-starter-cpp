@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.16)
 
 # set the project name and version
 project(storm-project-starter VERSION 1.0)
