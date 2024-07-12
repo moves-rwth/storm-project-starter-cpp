@@ -1,6 +1,6 @@
-#include <storm-parsers/api/storm-parsers.h>
 #include <storm/api/storm.h>
 #include <storm/utility/initialize.h>
+#include <storm-parsers/api/storm-parsers.h>
 
 typedef storm::models::sparse::Dtmc<double> Dtmc;
 typedef storm::modelchecker::SparseDtmcPrctlModelChecker<Dtmc> DtmcModelChecker;
