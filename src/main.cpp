@@ -1,11 +1,5 @@
-#include <storm/api/storm.h>
 #include <storm-parsers/api/storm-parsers.h>
-#include <storm-parsers/parser/PrismParser.h>
-#include <storm/storage/prism/Program.h>
-#include <storm/storage/jani/Property.h>
-#include <storm/modelchecker/results/CheckResult.h>
-#include <storm/modelchecker/results/ExplicitQuantitativeCheckResult.h>
-
+#include <storm/api/storm.h>
 #include <storm/utility/initialize.h>
 
 typedef storm::models::sparse::Dtmc<double> Dtmc;
@@ -13,18 +7,18 @@ typedef storm::modelchecker::SparseDtmcPrctlModelChecker<Dtmc> DtmcModelChecker;
 
 bool check(std::string const& path_to_model, std::string const& property_string) {
     // Assumes that the model is in the prism program language format and parses the program.
-    auto program = storm::parser::PrismParser::parse(path_to_model);
+    auto program = storm::api::parseProgram(path_to_model);
     // Code snippet assumes a Dtmc
     assert(program.getModelType() == storm::prism::Program::ModelType::DTMC);
     // Then parse the properties, passing the program to give context to some potential variables.
     auto properties = storm::api::parsePropertiesForPrismProgram(property_string, program);
     // Translate properties into the more low-level formulae.
     auto formulae = storm::api::extractFormulasFromProperties(properties);
-    
+
     // Now translate the prism program into a DTMC in the sparse format.
     // Use the formulae to add the correct labelling.
     auto model = storm::api::buildSparseModel<double>(program, formulae)->template as<Dtmc>();
-    
+
     // Create a model checker on top of the sparse engine.
     auto checker = std::make_shared<DtmcModelChecker>(*model);
     // Create a check task with the formula. Run this task with the model checker.
@@ -36,8 +30,7 @@ bool check(std::string const& path_to_model, std::string const& property_string)
     return quantRes[*model->getInitialStates().begin()] > 0.5;
 }
 
-
-int main (int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     if (argc != 3) {
         std::cout << "Needs exactly 2 arguments: model file and property" << std::endl;
         return 1;
