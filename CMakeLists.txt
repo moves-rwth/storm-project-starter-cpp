@@ -3,7 +3,12 @@ cmake_minimum_required(VERSION 3.23)
 # set the project name and version
 project(storm-project-starter VERSION 1.0)
 
+# The following two options are useful for example in a CI to disable using one of the two ways of obtaining storm.
 option(ALWAYS_FETCH_STORM "If ON, skip search for an installed version of Storm." OFF)
+option(NEVER_FETCH_STORM "If ON, skip fetching storm from a repo." OFF)
+if (ALWAYS_FETCH_STORM AND NEVER_FETCH_STORM)
+    message(FATAL_ERROR "ALWAYS_FETCH_STORM and NEVER_FETCH_STORM are mutually exclusive.")
+endif()
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 20)
@@ -20,7 +25,7 @@ if (NOT ALWAYS_FETCH_STORM)
     endif()
 endif()
 
-if(NOT TARGET storm)
+if(NOT NEVER_FETCH_STORM AND NOT TARGET storm)
     message(STATUS "Fetching storm!")
     include(FetchContent)
     SET(FETCHCONTENT_QUIET OFF)
