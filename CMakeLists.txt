@@ -25,17 +25,22 @@ if (NOT ALWAYS_FETCH_STORM)
     endif()
 endif()
 
-if(NOT NEVER_FETCH_STORM AND NOT TARGET storm)
-    message(STATUS "Fetching storm!")
-    include(FetchContent)
-    SET(FETCHCONTENT_QUIET OFF)
-    FetchContent_Declare(
-            storm
-            GIT_REPOSITORY https://github.com/sjunges/storm.git
-            GIT_TAG        34b03239df66b87879e0455308d3cdfbb3bb7908 #
-    )
-    FETCHCONTENT_MAKEAVAILABLE(storm)
+if(NOT TARGET storm)
+    if(NOT NEVER_FETCH_STORM)
+        message(STATUS "Fetching storm!")
+        include(FetchContent)
+        SET(FETCHCONTENT_QUIET OFF)
+        FetchContent_Declare(
+                storm
+                GIT_REPOSITORY https://github.com/sjunges/storm.git
+                GIT_TAG        34b03239df66b87879e0455308d3cdfbb3bb7908 #
+        )
+        FETCHCONTENT_MAKEAVAILABLE(storm)
+    else()
+        message(FATAL_ERROR "Storm not included.")
+    endif()
 endif()
+
 
 # specify main source file
 set(MAIN_FILE src/main.cpp)
