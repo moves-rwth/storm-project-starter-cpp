@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.23)
 project(storm-project-starter VERSION 1.0)
 
 # The following two options are useful for example in a CI to disable using one of the two ways of obtaining storm.
+set(STORM_ROOT  "" CACHE STRING "Additional hint where to look for storm?" )
 option(ALWAYS_FETCH_STORM "If ON, skip search for an installed version of Storm." OFF)
 option(NEVER_FETCH_STORM "If ON, skip fetching storm from a repo." OFF)
 if (ALWAYS_FETCH_STORM AND NEVER_FETCH_STORM)
@@ -19,7 +20,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/lib")
 
 # search for Storm library
 if (NOT ALWAYS_FETCH_STORM)
-    find_package(storm)
+    find_package(storm HINTS ${STORM_ROOT})
     if (storm_FOUND)
         message(STATUS "Found storm!")
     endif()
