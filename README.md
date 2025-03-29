@@ -15,13 +15,13 @@ cd ..
 
 Then, run the executable using 
 ```
-./build/storm-project-starter examples/die.pm examples/die.pctl
+./build/starter-project examples/die.pm examples/die.pctl
 ```
 The answer should be no.
 
 Then, run the executable using 
 ```
-./build/storm-project-starter examples/die.pm examples/die2.pctl
+./build/starter-project examples/die.pm examples/die2.pctl
 ```
 The answer should be yes.
 

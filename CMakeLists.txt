@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.23)
 
 # set the project name and version
-project(storm-project-starter VERSION 1.0)
+project(storm-project-starter VERSION 1.11)
 
 # The following two options are useful for example in a CI to disable using one of the two ways of obtaining storm.
 set(STORM_ROOT  "" CACHE STRING "Additional hint where to look for storm?" )
