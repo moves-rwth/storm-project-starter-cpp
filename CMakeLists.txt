@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.23)
+cmake_policy(SET CMP0144 NEW)
 
 # set the project name and version
 project(storm-project-starter VERSION 1.11)
@@ -14,12 +15,13 @@ endif()
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/bin")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/lib")
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/lib")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 
 # search for Storm library
 if (NOT ALWAYS_FETCH_STORM)
+    # The hint is no longer necessary due to CMP0144 from cmake 3.27 onwards.
     find_package(storm HINTS ${STORM_ROOT})
     if (storm_FOUND)
         message(STATUS "Found storm!")
