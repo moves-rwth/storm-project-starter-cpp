@@ -31,8 +31,14 @@ bool check(std::string const& path_to_model, std::string const& property_string)
 }
 
 int main(int argc, char* argv[]) {
+    if (argc == 2 && std::string(argv[1]) == "--help") {
+        std::cout << "Storm starter project example binary. " << std::endl;
+        std::cout << "Usage: " << std::endl;
+        std::cout << argv[0] << " [PRISM MODEL] [PROPERTY STRING]" << std::endl;
+        return 0;
+    }
     if (argc != 3) {
-        std::cout << "Needs exactly 2 arguments: model file and property" << std::endl;
+        std::cout << "Needs exactly 2 arguments. Run --help for info." << std::endl;
         return 1;
     }
 

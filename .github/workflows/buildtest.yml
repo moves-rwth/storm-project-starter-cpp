@@ -38,8 +38,8 @@ jobs:
 
       - name: Run and check output of example commands
         run: |
-          docker exec ci bash -c "/opt/storm-project-starter-cpp/build/storm-project-starter /opt/storm-project-starter-cpp/examples/die.pm /opt/storm-project-starter-cpp/examples/die.pctl | grep 'no'"
-          docker exec ci bash -c "/opt/storm-project-starter-cpp/build/storm-project-starter /opt/storm-project-starter-cpp/examples/die.pm /opt/storm-project-starter-cpp/examples/die2.pctl | grep 'yes'"
+          docker exec ci bash -c "/opt/storm-project-starter-cpp/build/bin/starter-project /opt/storm-project-starter-cpp/examples/die.pm /opt/storm-project-starter-cpp/examples/die.pctl | grep 'no'"
+          docker exec ci bash -c "/opt/storm-project-starter-cpp/build/bin/starter-project /opt/storm-project-starter-cpp/examples/die.pm /opt/storm-project-starter-cpp/examples/die2.pctl | grep 'yes'"
 
   notify:
     name: Email notification

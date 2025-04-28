@@ -28,8 +28,8 @@ COPY . .
 RUN mkdir -p /opt/storm-project-starter-cpp/build
 WORKDIR /opt/storm-project-starter-cpp/build
 
-# Configure Storm
-RUN cmake .. -DCMAKE_BUILD_TYPE=$build_type
+# Configure starter project using the (non-installed) version of storm.
+RUN cmake -DCMAKE_BUILD_TYPE=$build_type -DSTORM_ROOT="/opt/storm" -DNEVER_FETCH_STORM=ON ..
 
 # Build binary
 RUN make
