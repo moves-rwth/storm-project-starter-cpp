@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 3.23)
-cmake_policy(SET CMP0144 NEW)
+if (NOT ${CMAKE_VERSION} VERSION_LESS 3.24)
+    cmake_policy(VERSION 3.27)
+else()
+    # This is mostly for setting the X_ROOT flags?
+    message(STATUS "We recommend using cmake verison 3.27 or newer.")
+endif()
+
 
 # set the project name and version
 project(storm-project-starter VERSION 1.11)
