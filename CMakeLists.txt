@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.23)
-if (NOT ${CMAKE_VERSION} VERSION_LESS 3.24)
+if (NOT ${CMAKE_VERSION} VERSION_LESS 3.27)
     cmake_policy(VERSION 3.27)
 else()
     # This is mostly for setting the X_ROOT flags?
