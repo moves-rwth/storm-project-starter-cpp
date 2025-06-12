@@ -3,7 +3,7 @@ if (NOT ${CMAKE_VERSION} VERSION_LESS 3.27)
     cmake_policy(VERSION 3.27)
 else()
     # This is mostly for setting the X_ROOT flags?
-    message(STATUS "We recommend using cmake verison 3.27 or newer.")
+    message(STATUS "We recommend using cmake version 3.27 or newer.")
 endif()
 
 
@@ -11,7 +11,7 @@ endif()
 project(storm-project-starter VERSION 1.11)
 
 # The following two options are useful for example in a CI to disable using one of the two ways of obtaining storm.
-set(STORM_ROOT  "" CACHE STRING "Additional hint where to look for storm?" )
+set(STORM_ROOT  "" CACHE STRING "Additional hint where to look for storm.")
 option(ALWAYS_FETCH_STORM "If ON, skip search for an installed version of Storm." OFF)
 option(NEVER_FETCH_STORM "If ON, skip fetching storm from a repo." OFF)
 if (ALWAYS_FETCH_STORM AND NEVER_FETCH_STORM)
@@ -30,16 +30,16 @@ if (NOT ALWAYS_FETCH_STORM)
     # The hint is no longer necessary due to CMP0144 from cmake 3.27 onwards.
     find_package(storm HINTS ${STORM_ROOT})
     if (storm_FOUND)
-        message(STATUS "Found storm!")
+        message(STATUS "Found storm ${storm_VERSION} at ${storm_DIR}.")
     endif()
-    if (NOT STORM_HAVE_Z3)
+    if (storm_FOUND AND NOT STORM_HAVE_Z3)
         message(WARNING "This starter project requires a version of storm with z3 installed.")
     endif()
 endif()
 
 if(NOT TARGET storm)
     if(NOT NEVER_FETCH_STORM)
-        message(STATUS "Fetching storm!")
+        message(STATUS "Fetching storm.")
         include(FetchContent)
         SET(FETCHCONTENT_QUIET OFF)
         FetchContent_Declare(
