@@ -45,7 +45,7 @@ if(NOT TARGET storm)
         FetchContent_Declare(
                 storm
                 GIT_REPOSITORY https://github.com/sjunges/storm.git
-                GIT_TAG        34b03239df66b87879e0455308d3cdfbb3bb7908 #
+                GIT_TAG        stormpyprep
         )
         FETCHCONTENT_MAKEAVAILABLE(storm)
     else()
