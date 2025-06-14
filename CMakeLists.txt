@@ -18,13 +18,6 @@ if (ALWAYS_FETCH_STORM AND NEVER_FETCH_STORM)
     message(FATAL_ERROR "ALWAYS_FETCH_STORM and NEVER_FETCH_STORM are mutually exclusive.")
 endif()
 
-# specify the C++ standard
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
-
 # search for Storm library
 if (NOT ALWAYS_FETCH_STORM)
     # The hint is no longer necessary due to CMP0144 from cmake 3.27 onwards.
@@ -47,12 +40,47 @@ if(NOT TARGET storm)
                 GIT_REPOSITORY https://github.com/sjunges/storm.git
                 GIT_TAG        stormpyprep
         )
+        include(${storm_BINARY_DIR}/stormOptions.cmake)
         FETCHCONTENT_MAKEAVAILABLE(storm)
     else()
         message(FATAL_ERROR "Storm not included.")
     endif()
 endif()
 
+# specify the C++ standard
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+
+
+#############################################################
+##
+##	RPATH settings
+#############################################################
+
+# don't skip the full RPATH for the build tree
+SET(CMAKE_SKIP_BUILD_RPATH  FALSE)
+
+# when building, don't use the install RPATH already (but only when installing)
+SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
+
+if (MACOSX)
+    SET(RPATH_ORIGIN_EQUIV "@loader_path")
+else()
+    SET(RPATH_ORIGIN_EQUIV "$ORIGIN")
+endif()
+# the RPATH to be used when installing
+# Some parts here feel like a hack
+# TODO move these to the right targets rather than setting them globally.
+SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib;${CMAKE_INSTALL_PREFIX}/lib/storm;${CMAKE_INSTALL_PREFIX}/lib/storm/resources;${RPATH_ORIGIN_EQUIV};${RPATH_ORIGIN_EQUIV}/resources")
+# TODO this is less than ideal, but we had multiple issues with spot 2.13.1 in 25/06.
+SET(CMAKE_BUILD_RPATH "${STORM_3RDPARTY_BINARY_DIR}/spot/lib")
+
+# add the automatically determined parts of the RPATH
+# which point to directories outside the build tree to the install RPATH
+SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 # specify main source file
 set(MAIN_FILE src/main.cpp)
