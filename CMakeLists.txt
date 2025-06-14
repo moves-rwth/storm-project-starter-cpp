@@ -40,8 +40,8 @@ if(NOT TARGET storm)
                 GIT_REPOSITORY https://github.com/sjunges/storm.git
                 GIT_TAG        stormpyprep
         )
-        include(${storm_BINARY_DIR}/stormOptions.cmake)
         FETCHCONTENT_MAKEAVAILABLE(storm)
+        include(${storm_BINARY_DIR}/stormOptions.cmake)
     else()
         message(FATAL_ERROR "Storm not included.")
     endif()
