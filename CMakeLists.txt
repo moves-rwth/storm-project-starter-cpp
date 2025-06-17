@@ -37,8 +37,8 @@ if(NOT TARGET storm)
         SET(FETCHCONTENT_QUIET OFF)
         FetchContent_Declare(
                 storm
-                GIT_REPOSITORY https://github.com/sjunges/storm.git
-                GIT_TAG        stormpyprep
+                GIT_REPOSITORY https://github.com/moves-rwth/storm.git
+                GIT_TAG        master
         )
         FETCHCONTENT_MAKEAVAILABLE(storm)
         include(${storm_BINARY_DIR}/stormOptions.cmake)
