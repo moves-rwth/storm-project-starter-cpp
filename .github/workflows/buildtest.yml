@@ -54,7 +54,7 @@ jobs:
           }
     steps:
       - name: Git clone
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Build project from Dockerfile
         run: |
           docker build -t movesrwth/storm-starter . \
@@ -105,7 +105,7 @@ jobs:
         with:
           xcode-version: ${{ matrix.config.xcode }}
       - name: Git clone
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install dependencies
         # cmake and gmp are already installed
         run: |
