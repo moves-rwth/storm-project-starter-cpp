@@ -75,9 +75,9 @@ jobs:
     strategy:
       matrix:
         config:
-          - {name: "XCode 14.3, Intel, fetch, intree, Release",
-             distro: "macos-13",
-             xcode: "14.3",
+          - {name: "XCode Latest, Intel, fetch, intree, Release",
+             distro: "macos-15-intel",
+             xcode: "latest-stable",
              build_type: "Release",
              never_fetch_storm: "OFF"
           }
@@ -87,15 +87,15 @@ jobs:
              build_type: "Release",
              never_fetch_storm: "OFF"
           }
-          - {name: "XCode 16.3, ARM, fetch, intree, Debug",
+          - {name: "XCode Latest, ARM, fetch, intree, Debug",
              distro: "macos-15",
-             xcode: "16.3",
+             xcode: "latest-stable",
              build_type: "Debug",
              never_fetch_storm: "OFF"
           }
-          - {name: "XCode 16.3, ARM, fetch, intree, Release",
+          - {name: "XCode Latest, ARM, fetch, intree, Release",
              distro: "macos-15",
-             xcode: "16.3",
+             xcode: "latest-stable",
              build_type: "Release",
              never_fetch_storm: "OFF"
           }
